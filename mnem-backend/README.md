@@ -3,7 +3,7 @@ Backend server for MNEMIK.
 ## Requirements
 Install the requirements using pip:
 
-`pip install requirements.txt`
+`pip install -r requirements.txt`
 
 ## Deploy Backend Server
 Run backend server:
