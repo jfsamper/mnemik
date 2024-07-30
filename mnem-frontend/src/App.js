@@ -20,7 +20,7 @@ function App() {
       <div className="App">
       <header className="App-header">
       <br/> <a href='/'><img src={logo} height="40vmin" className="App-logo" alt="logo" /></a>
-      <br/> <h1>Mnem Inventory Manager</h1>
+      <br/> <h1><b>M</b>nemik <b>I</b>nventory <b>K</b>eeper</h1>
       </header>
         <nav>
           <ul>
