@@ -1,13 +1,9 @@
 # Mnemik Backend
 Backend server for MNEMIK.
 ## Requirements
-1. Install the requirements using pip:
+Install the requirements using pip:
 
 `pip install requirements.txt`
-
-2. Install the required packages:
-
-`pip install flask-login flask-cors flask-session`
 
 ## Deploy Backend Server
 Run backend server:
