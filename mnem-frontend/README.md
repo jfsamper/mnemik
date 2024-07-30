@@ -2,9 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Install
+To install the required packages run:
 
-In the project directory ([/mnem-frontend/src/](/mnem-frontend/src/)), you can run:
+### `npm install`
+
+## Usage
+
+In the project directory run:
 
 ### `npm start`
 
