@@ -5,7 +5,7 @@ Backend server for MNEMIK.
 Install Flask using pip:
 ### `pip install Flask`
 2. Install the required packages:
-### `pip install flask_login flask_cors flask_session`
+### `pip install flask-login flask-cors flask-session`
 ## Deploy Backend Server
 Run backend server:
 ### `python src/mnem.py`
