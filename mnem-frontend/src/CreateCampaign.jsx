@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { createCampaign } from './services/campaigns';
-import { json } from 'react-router-dom';
+import { axiosInstance } from './services/auth';
 
 function CreateCampaign() {
   const [name, setName] = useState('');
@@ -15,19 +14,18 @@ const handleSubmit = async (event) => {
         name: name,
         admin_id: parseInt(0), // Replace with the actual admin/master ID
       };
+      const response = await axiosInstance.post('/api/campaigns/create', campaignData);
+      console.log(response); //remove me - test data !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-      const response = await createCampaign(campaignData);
-      console.log(response); //remove me - test data
-
-      if (response.ok) {
+      if (response.status === 201) {
         // Handle success case, e.g. show a success message or redirect to a new page
         alert('Campaign created successfully!'); // Show a success message
       } else {
         // Handle error case, e.g. show an error message
-        console.error('Error creating campaign:', response.statusText);
+        console.error('Error creating campaign:', response.data.error);
       }
   } catch (error) {
-    console.error('Error creating campaign:', error);
+    console.error(error);
   }
 };
 

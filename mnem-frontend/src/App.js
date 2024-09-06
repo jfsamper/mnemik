@@ -4,17 +4,27 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import ItemList from './ItemList';
 import ItemDetail from './ItemDetail';
+import CreateItem from './CreateItem';
 import CampaignList from './CampaignList';
 import CampaignDetail from './CampaignDetail';
 import CreateCampaign from './CreateCampaign';
-import CreateItem from './CreateItem';
 import Login from './Login';
 // Import other components you want to route to
+import { isAuthenticated } from './services/auth';
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const handleLogin = async () => {
+    const success = await isAuthenticated();
+    if (success) {
+      setLoggedIn(true);
+    }
+  };
+
   return (
     <Router>
       <div className="App">
@@ -56,12 +66,22 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 function Home() {
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
   return (
     <div>
       <h2>Home</h2>
+      <p>Welcome to Mnemik</p>
+      {!username && <p>Welcome Guest. To login please <Link to="/login">click here</Link>.</p>} 
+      {username && <p>You are logged in as: {username}.</p>}
     </div>
   );
 }

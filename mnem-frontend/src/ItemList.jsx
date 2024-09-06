@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getItems } from './services/items';
 
 function ItemList() {
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState({id: 0, name: 'Test Item', price: 100, weight: 1});
 
   useEffect(() => {
     const fetchItems = async () => {

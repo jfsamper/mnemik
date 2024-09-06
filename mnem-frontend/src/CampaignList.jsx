@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCampaigns, getCampaign, createCampaign, updateCampaign, deleteCampaign } from './services/campaigns';
 
-function CampaignList() {
+const CampaignList = () => {
   const [campaigns, setCampaigns] = useState([
     {id: 1, name: 'Arrakis'},
   ]);

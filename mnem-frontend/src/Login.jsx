@@ -1,54 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Session } from 'react-session';
+import { login, isAuthenticated } from './services/auth';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [authenticated, setAuthenticated] = useState(false);
-    
-
-    useEffect(() => {
-        if (authenticated) {
-            window.location.href = '/items';
-        }    
-    }, []);
 
 const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-        const response = await fetch('http://localhost:5000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        });
-        const data = await response.json();
-        if (data.success) {
-            //set session to ('user_id', data.user_id)
+    try { 
+        const response = await login(username, password);
+        if (response.success) { // Check if the response indicates success
             alert('Login successful!');            
-            setAuthenticated(true);
             setError('');
-            // Redirect to items page while logged in
-            window.location.href = '/items';
+            localStorage.setItem('username', username);
         } else {
-            // Display an error message based on the response
-            if (data.message === 'Invalid credentials') {
-                // Display an error message for wrong username or password
-                setError('Invalid username or password');
-            } else {
                 // Display a generic error message
                 setError('An error occurred. Please try again.');
-            }
         }
+        
     } catch (error) {
         console.error(error);
-        // Display a generic error message
-        setError('An error occurred. Please try again.');
+        if (error.response && error.response.status === 401) {
+            // Display an authentication error message
+            setError('Invalid username or password. Please try again.');
+        } else {
+            setError('A network error occurred. Please try again.');   
+        }
     }
 };
 
@@ -76,6 +54,13 @@ const handleSubmit = async (event) => {
                 <br/>
                 <button type="submit">Login</button>
                 {error && <p className="error">{error}</p>}
+                {!error && isAuthenticated() && (
+                    <div>
+                    <h2>Authenticated!</h2>
+                    <button onClick={() => setUsername('')}>Logout</button>
+                    <p>Welcome {username}</p>
+                    </div>
+                )}
             </form>
         </div>
     );
