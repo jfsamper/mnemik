@@ -1,4 +1,4 @@
-# Mnemik Inventory Keeper
+# Mnem Inventory Keeper
 **M**NEM **I**nventory **K**eeper is an inventory manager for TTRPGs.
 ## Requirements
 - [Python and pip](https://packaging.python.org/en/latest/tutorials/installing-packages/)
